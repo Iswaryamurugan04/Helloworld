@@ -4,3 +4,4 @@ testing fast forward merge
 testin no fast forward
 testing fast file
 testing back my commits
+hello nee waste
