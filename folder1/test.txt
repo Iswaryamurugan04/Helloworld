@@ -3,5 +3,8 @@ just for testing,
 testing fast forward merge
 testin no fast forward
 testing fast file
+<<<<<<< HEAD
 testing back my commits
 hello nee waste
+=======
+>>>>>>> abfbbf9 (added 3 commits)
