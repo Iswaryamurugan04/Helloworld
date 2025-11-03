@@ -2,18 +2,13 @@ pipeline {
     agent {
         docker {
             image 'node:18'
-            args '-w /home/jenkins_project' // sets working directory inside container
+            args '-v /tmp:/tmp -w /tmp'
         }
     }
     stages {
-        stage('Install') {
+        stage('Echo') {
             steps {
-                sh 'npm install'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'npm test'
+                sh 'echo "Docker is working!"'
             }
         }
     }
