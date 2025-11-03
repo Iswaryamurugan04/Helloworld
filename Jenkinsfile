@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:18'
+            args '-v /tmp:/tmp' // or skip mounting entirely
         }
     }
     stages {
@@ -15,11 +16,5 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Run') {
-            steps {
-                sh 'npm start'
-            }
-        }
     }
 }
-
