@@ -1,10 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker-agent'
+    }
     stages {
-        stage('Run Docker') {
+        stage('Run') {
             steps {
-                bat 'docker pull ubuntu:latest'
-                bat 'docker run ubuntu:latest echo Hello from container'
+                sh 'echo Hello from Docker agent'
             }
         }
     }
