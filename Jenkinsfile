@@ -1,16 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'ubuntu:latest'
-        }
-    }
+    agent any
     stages {
-        stage('Install Git') {
+        stage('Run Docker') {
             steps {
-                sh 'apt-get update && apt-get install -y git'
-                sh 'git --version'
+                bat 'docker pull ubuntu:latest'
+                bat 'docker run ubuntu:latest echo Hello from container'
             }
         }
     }
 }
-
