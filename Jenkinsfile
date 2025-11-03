@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:18'
-            args '-v /tmp:/tmp' // or skip mounting entirely
+            args '-w /home/jenkins_project' // sets working directory inside container
         }
     }
     stages {
