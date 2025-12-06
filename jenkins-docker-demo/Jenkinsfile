@@ -14,6 +14,7 @@ pipeline {
 
         stage('Cleanup Old Container') {
             steps {
+                // stop & remove old container if exists
                 sh "docker stop demo_container || true"
                 sh "docker rm demo_container || true"
             }
@@ -21,12 +22,14 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t $DOCKER_IMAGE ."
+                // force rebuild without cache
+                sh "docker build --no-cache -t $DOCKER_IMAGE ."
             }
         }
 
         stage('Run New Container') {
             steps {
+                // run fresh container with latest code
                 sh "docker run -d -p 3000:3000 --name demo_container $DOCKER_IMAGE"
             }
         }
