@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "jenkins-docker-demo:latest"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'feature/jenkins-docker-demo', url: 'https://github.com/Iswaryamurugan04/Helloworld.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t $DOCKER_IMAGE ."
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh "docker run -d -p 3000:3000 --name demo_container $DOCKER_IMAGE"
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                sh "docker stop demo_container || true"
+                sh "docker rm demo_container || true"
+            }
+        }
+    }
+}
